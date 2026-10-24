@@ -1,0 +1,14 @@
+{
+  "name": "branchlearn",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Пакеты обучения сотрудников с назначениями и проверяемыми ответами на контрольные вопросы. Это рабочий журнал, не защищённый экзамен.",
+  "engines": {
+    "node": ">=24.15 <25"
+  },
+  "scripts": {
+    "start": "node start.js",
+    "test": "node --test tests/*.test.js"
+  }
+}

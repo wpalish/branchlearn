@@ -1,0 +1,48 @@
+[
+  {
+    "collection": "courses",
+    "as": "c",
+    "data": {
+      "name": "Учебный пакет",
+      "material": "В тестовом процессе источник проверяют перед одобрением."
+    }
+  },
+  {
+    "collection": "checks",
+    "as": "q",
+    "data": {
+      "course": "$c",
+      "question": "Когда проверяют источник?",
+      "answer": "Перед одобрением"
+    }
+  },
+  {
+    "collection": "assignments",
+    "as": "a",
+    "data": {
+      "course": "$c",
+      "learner": "TEST",
+      "due": "2099-12-31"
+    }
+  },
+  {
+    "actor": "operator",
+    "collection": "responses",
+    "data": {
+      "assignment": "$a",
+      "check": "$q",
+      "answer": "Перед одобрением"
+    },
+    "expect": "Проверенных точных ответов: 1 из 1"
+  },
+  {
+    "collection": "checks",
+    "id": "$q",
+    "error": "нельзя менять",
+    "data": {
+      "course": "$c",
+      "question": "Когда проверяют источник?",
+      "answer": "После одобрения"
+    }
+  }
+]
