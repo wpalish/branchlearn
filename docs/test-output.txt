@@ -1,34 +1,52 @@
 TAP version 13
-# Subtest: BranchLearn: complete original workflow, calculation and rejected invalid transition
-ok 1 - BranchLearn: complete original workflow, calculation and rejected invalid transition
+# Subtest: recorded answer protects assignment learner and course including archived history; deadline remains editable
+ok 1 - recorded answer protects assignment learner and course including archived history; deadline remains editable
   ---
-  duration_ms: 2.647125
+  duration_ms: 4.217792
+  type: 'test'
+  ...
+# Subtest: recorded response cannot be reassigned to another learner or question; answer correction and explicit retry remain available
+ok 2 - recorded response cannot be reassigned to another learner or question; answer correction and explicit retry remain available
+  ---
+  duration_ms: 1.215917
+  type: 'test'
+  ...
+# Subtest: file restart and restore retain historical associations; empty assignments move, legacy archived mismatches remain readable without repair
+ok 3 - file restart and restore retain historical associations; empty assignments move, legacy archived mismatches remain readable without repair
+  ---
+  duration_ms: 9.175917
+  type: 'test'
+  ...
+# Subtest: BranchLearn: complete original workflow, calculation and rejected invalid transition
+ok 4 - BranchLearn: complete original workflow, calculation and rejected invalid transition
+  ---
+  duration_ms: 2.558375
   type: 'test'
   ...
 # Subtest: real file restart, optimistic conflict and validated restore into an empty database
-ok 2 - real file restart, optimistic conflict and validated restore into an empty database
+ok 5 - real file restart, optimistic conflict and validated restore into an empty database
   ---
-  duration_ms: 3.787333
+  duration_ms: 8.944875
   type: 'test'
   ...
 # Subtest: HTTP prevents anonymous reads and cross-origin/CSRF writes while authenticated workflow saves
-ok 3 - HTTP prevents anonymous reads and cross-origin/CSRF writes while authenticated workflow saves
+ok 6 - HTTP prevents anonymous reads and cross-origin/CSRF writes while authenticated workflow saves
   ---
-  duration_ms: 72.948
+  duration_ms: 72.272042
   type: 'test'
   ...
 # Subtest: two products on one host use isolated session cookies and preserve both logins
-ok 4 - two products on one host use isolated session cookies and preserve both logins
+ok 7 - two products on one host use isolated session cookies and preserve both logins
   ---
-  duration_ms: 86.891708
+  duration_ms: 89.122042
   type: 'test'
   ...
-1..4
-# tests 4
+1..7
+# tests 7
 # suites 0
-# pass 4
+# pass 7
 # fail 0
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 211.330292
+# duration_ms 216.262083

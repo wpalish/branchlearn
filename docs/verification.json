@@ -4,7 +4,7 @@
   "runtime": "Node 24.19.0",
   "tests": {
     "slug": "branchlearn",
-    "tests": 4,
+    "tests": 7,
     "pass": true,
     "runtime": "v24.19.0"
   },
@@ -37,5 +37,10 @@
     "slug": "branchlearn",
     "query": "TEST",
     "result": "visible_label_and_no_results_recovery_passed"
+  },
+  "followup": {
+    "date": "2026-10-25",
+    "change": "Preserve recorded response and assignment identities including archived history; retain explicit corrections/retry",
+    "evidence": "docs/history-verification.json"
   }
 }

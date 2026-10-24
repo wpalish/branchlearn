@@ -1,0 +1,72 @@
+{
+  "date": "2026-10-25",
+  "product": "branchlearn",
+  "baseline_commit": "a8a60d3",
+  "defects": [
+    "Assignment learner could change despite a recorded response",
+    "Recorded response could be reassigned to another assignment or question",
+    "Assignment course could change after all responses archived, mismatching historical question course"
+  ],
+  "before_fix": {
+    "regressions_failed": 3,
+    "archived_response_course_mismatch": true,
+    "archived_question_edit_error": "Утверждённую запись нельзя менять. Создайте новую версию.",
+    "existing_guard_note": "Archived responses already protected the question text/answer/course; this was a passing control, not a new defect"
+  },
+  "policy": "Recorded response keeps assignment and question identity. Any recorded response, including archived, protects assignment course and learner. Deadline edits, unarchived answer-text corrections, explicit archive/retry and movement of assignments without responses remain available. Legacy archived mismatches restore unchanged without silent repair or unrelated-work freeze.",
+  "tests": {
+    "passed": 7,
+    "failed": 0,
+    "runtime": "v24.19.0",
+    "log": "docs/test-output.txt",
+    "regression": "tests/history.test.js",
+    "coverage": [
+      "learner/course guards with live and archived responses; question protection retained",
+      "recorded response cannot switch assignment/question; rejected operations preserve full state/revision/audit",
+      "answer-text correction and explicit archive/new attempt remain available; archived record read-only; live duplicate rejected",
+      "deadline edit and empty assignment/course/learner move allowed",
+      "real file close/reopen, validated empty-database restore and legacy archived mismatch retained without automatic repair",
+      "original HTTP auth/CSRF/cookie/conflict tests remain passing"
+    ]
+  },
+  "browser": {
+    "data": "synthetic only, localhost8830",
+    "recorded_response_and_learner_rejections": {
+      "all_data_unchanged": true,
+      "response_assignment_and_question_preserved": true,
+      "recorded_learner_preserved": true,
+      "revision": 9,
+      "audit_events": 9
+    },
+    "all_responses_archived_course_rejection": {
+      "archived_responses": 2,
+      "assignment_course_and_learner_preserved": true,
+      "questions_and_answer_associations_unchanged": true,
+      "revision": 10,
+      "audit_events": 10
+    },
+    "positive_edits_and_history": {
+      "historical_course_learner_and_answers_preserved": true,
+      "deadline_edit_allowed": true,
+      "unanswered_assignment_move_allowed": true,
+      "archived_responses": 2,
+      "revision": 12,
+      "audit_events": 12
+    },
+    "readback": "Reload then Show archive:2 original responses retain original learner, questions and answer; original assignment retains course/learner with changed deadline; empty assignment moved to other course",
+    "screens": [
+      "docs/response-transfer-rejected.jpg",
+      "docs/learner-change-rejected.jpg",
+      "docs/archived-course-transfer-rejected.jpg",
+      "docs/positive-edits.jpg",
+      "docs/history-preserved.jpg"
+    ]
+  },
+  "limits": [
+    "Working journal with visible answer key, not an exam or evidence of skill mastery",
+    "No immutable snapshots of entire course material and no external LMS integration",
+    "Old mistaken associations are not automatically corrected; require separate manual reconciliation",
+    "UI layout/schema unchanged; no fresh whole-interface/security audit",
+    "Server checked locally; no public server deployment/customer acceptance"
+  ]
+}

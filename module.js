@@ -62,10 +62,14 @@ const definition = {
     ]),
   ],
   validate(state, before, command, actor) {
-    for (const response of live(state, "responses")) {
-      const a = byId(state, "assignments", response.assignment),
-        q = byId(state, "checks", response.check);
-      required(a.course === q.course, "Вопрос относится к другому пакету.");
+    for (const response of rows(state, "responses")) {
+      const old = changed(before, "responses", response.id);
+      if (old) immutable(old, response, ["assignment", "check"]);
+      if (!response.archived) {
+        const a = byId(state, "assignments", response.assignment),
+          q = byId(state, "checks", response.check);
+        required(a.course === q.course, "Вопрос относится к другому пакету.");
+      }
     }
     unique(
       live(state, "responses").map((x) => ({
@@ -74,6 +78,16 @@ const definition = {
       "key",
       "Ответ на вопрос в назначении",
     );
+    for (const assignment of rows(state, "assignments")) {
+      const old = changed(before, "assignments", assignment.id);
+      if (
+        old &&
+        [...rows(before, "responses"), ...rows(state, "responses")].some(
+          (r) => r.assignment === assignment.id,
+        )
+      )
+        immutable(old, assignment, ["course", "learner"]);
+    }
     for (const c of rows(state, "checks")) {
       const old = changed(before, "checks", c.id);
       if (old && rows(state, "responses").some((r) => r.check === c.id))
